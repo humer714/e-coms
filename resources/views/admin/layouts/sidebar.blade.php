@@ -42,7 +42,7 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="products.html">Prodcts</a>
+                                <a href="{{route('products.index')}}">Prodcts</a>
                             </li>
 
                             <li>
@@ -58,11 +58,11 @@
                         </a>
                         <ul class="sidebar-submenu">
                             <li>
-                                <a href="category.html">Category List</a>
+                                <a href="{{route('category.index')}}">Category List</a>
                             </li>
 
                             <li>
-                                <a href="add-new-category.html">Add New Category</a>
+                                <a href=" {{route('category.create')}}">Add New Category</a>
                             </li>
                         </ul>
                     </li>

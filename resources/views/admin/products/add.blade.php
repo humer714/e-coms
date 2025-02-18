@@ -17,12 +17,14 @@
         <div class="col-12">
             <div class="row">
                 <div class="col-sm-8 m-auto">
+
+                    <!-- old card -->
                     <div class="card">
                         <div class="card-body">
                             <div class="card-header-2">
                                 <h5>Product Information</h5>
                             </div>
-                            <form action="{{ route('products.store') }}" method="POST" multipart enctype="multipart/form-data">
+                            <form class="theme-form theme-form-2 mega-form" action="{{ route('products.store') }}" method="POST" multipart enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $product->id }}">
 
@@ -36,14 +38,26 @@
                                 <div class="mb-4 row align-items-center">
                                     <label class="form-label-title col-sm-3 mb-0">Type</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="type" placeholder="Type" value="{{ old('type', $product->type) }}">
+                            
+                                        <select class="js-example-basic-single w-100" name="type" value="{{ old('type', $product->type) }}">
+                                            <option disabled>Type Menu</option>
+                                            <option value="normal" @if($product->type == 'normal') selected @endif>Normal</option>
+                                            <option value="featured"  @if($product->type == 'featured') selected @endif>Featured</option>
+                                            <option value="topselling" @if($product->type == 'topselling') selected @endif>Topselling</option>
+                                            <option value="new" @if($product->type == 'new') selected @endif>New</option>
+                                            <option value="discount" @if($product->type == 'discount') selected @endif>Discount</option>
+                                        </select>
                                     </div>
                                 </div>
 
                                 <div class="mb-4 row align-items-center">
                                     <label class="form-label-title col-sm-3 mb-0">Status</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" type="text" name="status" placeholder="Status" value="{{ old('status', $product->status) }}" required>
+                                        <select class="js-example-basic-single w-100" name="status" value="{{ old('status', $product->status) }}">
+                                            <option disabled>Status Menu</option>
+                                            <option value="active" @if($product->status == 'active') selected @endif>Active</option>
+                                            <option value="inactive" @if($product->status == 'inactive') selected @endif>Inactive</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -84,16 +98,16 @@
                                     </div>
                                 </div>
                                 <!-- Dropzone for Multiple Images -->
-                                <div class="col-md-12 PT-10">
-                                    <label class="font12 mb-5">Add Product Images</label>
-                                    <form action="/upload_product_images" class="dropzone"
-                                        id="dropzonewidgetexpenseImages" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <input name="hidden_key_id" class="hidden_key_id" hidden type="text" />
-                                        <input name="operation" class="operation" hidden type="text" />
-                                    </form>
+                               
+                                <div class="mb-4 row align-items-center">
+                                    <label
+                                        class="col-sm-3 col-form-label form-label-title">Images</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control form-choose" type="file"
+                                            id="formFile" multiple>
+                                    </div>
                                 </div>
+                            
 
                                 <div class="mb-4 row align-items-center">
                                     <label class="form-label-title col-sm-3 mb-0">Stock</label>
@@ -105,9 +119,9 @@
                                     <label
                                         class="col-sm-3 col-form-label form-label-title">Category</label>
                                     <div class="col-sm-9">
-                                        <select class=" select2 form-control" name="category_id" required>
-                                            <option value="">Select Category</option>
-                                            @foreach(@$categories as $category)
+                                        <select class="js-example-basic-single w-100" name="category_id">
+                                            <option disabled>Category Menu</option>
+                                             @foreach(@$categories as $category)
                                             <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
                                                 {{ $category->name }}
                                             </option>
